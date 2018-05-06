@@ -8,8 +8,6 @@ define("FLOAT",0);
     $graphtype = get_graphs_detail($_GET['graphid']);
 //    print_r($graphtype);
 echo "function legendFormatter(data) {
-
-    console.log(data);
   
 var g = data.dygraph;
 

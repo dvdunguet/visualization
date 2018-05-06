@@ -31,6 +31,14 @@ function get_items($graphid){
     return $result;
 }
 
+
+function get_items_by_hostid($hostid)
+{
+    $sql = " SELECT itemid,name,key_ FROM items WHERE hostid=" . $hostid . " AND value_type IN (0,3);";
+    $result = db_get_list($sql);
+    return $result;
+}
+
 function get_item_detail($itemid){
     $sql='SELECT name,key_,value_type,delay,trends,history,units FROM items WHERE items.itemid='.$itemid.';';
     $result=db_get_row($sql);

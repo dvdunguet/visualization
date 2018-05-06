@@ -79,6 +79,6 @@ if($graphsInHost==false){ unset($_SESSION['graphid']); }
 
 db_close();
 
-include_once ("charts.views.php");
+include_once ("views/charts.views.php");
 
 ?>

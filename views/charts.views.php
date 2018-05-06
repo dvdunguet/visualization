@@ -7,6 +7,7 @@
     if($graphtype['graphtype']==0 || $graphtype['graphtype'] ==1) {
         echo '<script type="text/javascript"
             src="js/dygraph.js"></script>
+            <link rel="stylesheet" src="css/dygraph.css" />
             <style type="text/css">
       .dygraph-legend {
         background-color: rgba(200, 200, 255, 0.75) !important;
@@ -31,7 +32,6 @@
     </style>
     
 ';
-//        <link rel="stylesheet" src="css/dygraph.css" />
     }elseif ($graphtype['graphtype']==2 || $graphtype['graphtype'] ==3){
         echo '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>';
         echo '
@@ -108,14 +108,6 @@
      style='width:100%; height:300px;'></div>
 <script type='text/javascript' src=\"data/dataDygraphs.php?graphid=".$_SESSION['graphid']."&datatype=".$_SESSION['datatype']."\" ></script>";
         }elseif ($graphtype['graphtype']==2 || $graphtype['graphtype'] ==3){
-            if(!isset($_SESSION['startDate'])&&!isset($_SESSION['endDate'])){
-            $timenow = new DateTime();
-            $startdate=$timenow->getTimestamp();
-            $enddate=$startdate-604800;
-            }else{
-                $startdate=$_SESSION['startDate'];
-                $enddate=$_SESSION['endDate'];
-            }
             echo '<div class=\'col-md-4\'>
         <div class="form-group">
             <div class=\'input-group date\' id=\'datetimepicker6\'>
@@ -148,7 +140,7 @@
     <div class="row">
     ';
             echo '<div id="piechart" style="width: 900px; height: 500px;"></div>';
-            echo '<script type="text/javascript" src="data/drawGraph.php?graphid='.$_SESSION['graphid'].'&startDate='.$startdate.'&endDate='.$enddate.'"></script>';
+            echo '<script type="text/javascript" src="data/drawGraph.php?graphid='.$_SESSION['graphid'].'&startDate='.$_SESSION['startDate'].'&endDate='.$_SESSION['endDate'].'"></script>';
         }
         ?>
     </div>

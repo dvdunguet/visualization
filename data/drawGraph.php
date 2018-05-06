@@ -109,6 +109,7 @@ echo "
         var options = {";
 if($graphtype['show_3d']==1)
 echo            'is3D: true,';
+echo 'sliceVisibilityThreshold:0,';
 if($graphtype['graphtype']==3){
     echo "slices: {\n";
     for($i=0;$i<$numberItems;$i++){
