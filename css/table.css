@@ -1,0 +1,29 @@
+/*.TableHead {*/
+    /*background-color: white;*/
+/*}*/
+
+.UnselectedRow {
+    background-color: white;
+    cursor:pointer;
+}
+
+.UnselectedRow:hover {
+    background-color: yellow;
+    cursor:pointer;
+}
+
+.SelectedRow {
+    background-color: #4eee94;
+    cursor:pointer;
+}
+
+.SelectedRow:hover {
+    background-color: red;
+    cursor:pointer;
+}
+
+div#submit {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+}
