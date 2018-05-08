@@ -13,11 +13,19 @@
 </head>
 <body>
 <div class="container">
+    <nav class="navbar navbar-custom">
+        <ul class="nav navbar-nav">
+            <li><a href="charts.php">Đồ thị</a></li>
+            <li class="active"><a href="report.php">Báo cáo</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="container">
     <form action="report.php" method="get">
         <div class="row">
             <div class='col-md-6'>
-                Group:<select class="form-control" name="groupid" onchange="this.form.submit()">
-                    <option value=0>all</option>
+                Nhóm:<select class="form-control" name="groupid" onchange="this.form.submit()">
+                    <option value=0>Tất cả</option>
                     <?php
                     foreach ($groups as $key => $value){
                         echo '<option value='.$value['groupid'];
@@ -30,8 +38,8 @@
                 </select>
             </div>
             <div class='col-md-6'>
-                Host:<select class="form-control" id="hostid" name="hostid" onchange="this.form.submit();">
-                    <option value=0>all</option>
+                Máy chủ:<select class="form-control" id="hostid" name="hostid" onchange="this.form.submit();">
+                    <option value=0>---Chọn máy chủ---</option>
                     <?php
                     foreach ($hosts as $key => $value){
                         echo '<option value='.$value['hostid'];
@@ -48,6 +56,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
+                    Từ ngày:
                     <div class="input-group date" id="datetimepicker6">
                         <input type="text" class="form-control">
                         <span class="input-group-addon">
@@ -58,6 +67,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
+                    Đến ngày:
                     <div class="input-group date" id="datetimepicker7">
                         <input type="text" class="form-control">
                         <span class="input-group-addon">
@@ -69,7 +79,7 @@
         </div>
     </form>
     <div class="row">
-        <h2>List items</h2>
+        <h2>Danh sách các thông tin lưu trữ </h2>
     </div>
     <form action="report/createReport.php" method="POST">
         <input type="hidden" id="startDate" name="startDate" value="">
@@ -82,8 +92,8 @@
                     <th>
                         <input type="checkbox" name="chkall" id="chkall"  onclick="javascript:selectAll();">
                     </th>
-                    <th>No</th>
-                    <th>Key name</th>
+                    <th>STT</th>
+                    <th>Từ khóa</th>
                 </tr>
                 </thead>
                 <tbody>

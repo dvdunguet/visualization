@@ -9,27 +9,23 @@
             src="js/dygraph.js"></script>
             <link rel="stylesheet" src="css/dygraph.css" />
             <style type="text/css">
-      .dygraph-legend {
-        background-color: rgba(200, 200, 255, 0.75) !important;
-//        padding: 4px;
-//        border: 1px solid #000;
-//        border-radius: 10px;
-//        box-shadow: 4px 4px 4px #888;
-//        pointer-events: none;
-//        width: 100px;
-        position: relative;
-        top:350px !important;
-        left:0px !important;
-        display:block;
-        
-      }
-      pre {
-        margin-top: 30px;
-      }
-      .dygraph-legend > span {
-      display:block !important;
-      }
-    </style>
+                .dygraph-legend {
+                    background-color: rgba(200, 200, 255, 0.75) !important;
+                    position: relative;
+                    top:350px !important;
+                    left:0px !important;
+                    display:block;
+                }
+                pre {
+                    margin-top: 30px;
+                }
+                .dygraph-legend > span {
+                    display:block !important;
+                }
+                .navbar-custom .active {
+                    background-color: #cccccc;
+                }
+            </style>
     
 ';
     }elseif ($graphtype['graphtype']==2 || $graphtype['graphtype'] ==3){
@@ -44,11 +40,19 @@
 </head>
 <body>
 <div class="container">
+    <nav class="navbar navbar-custom">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="charts.php">Đồ thị</a></li>
+            <li><a href="report.php">Báo cáo</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="container">
     <form action="charts.php" method="get">
         <div class="row">
             <div class='col-md-4'>
-                Group:<select class="form-control" name="groupid" onchange="this.form.submit()">
-                    <option value=0>all</option>
+                Nhóm:<select class="form-control" name="groupid" onchange="this.form.submit()">
+                    <option value=0>Tất cả</option>
                     <?php
                     foreach ($groups as $key => $value){
                         echo '<option value='.$value['groupid'];
@@ -61,8 +65,8 @@
                 </select>
             </div>
             <div class='col-md-4'>
-                Host:<select class="form-control" name="hostid" onchange="this.form.submit()">
-                    <option value=0>all</option>
+                Máy chủ:<select class="form-control" name="hostid" onchange="this.form.submit()">
+                    <option value=0>Tất cả</option>
                     <?php
                     foreach ($hosts as $key => $value){
                         echo '<option value='.$value['hostid'];
@@ -75,8 +79,8 @@
                 </select>
             </div>
             <div class='col-md-4'>
-                Graph:<select class="form-control" name="graphid" onchange="this.form.submit()">
-                    <option value=0>not selected</option>
+                Đồ thị:<select class="form-control" name="graphid" onchange="this.form.submit()">
+                    <option value=0>--- Chọn đồ thị ---</option>
                     <?php
                     foreach ($graphs as $key => $value){
                         echo '<option value='.$value['graphid'];
@@ -92,14 +96,16 @@
     <div class="row">
         <?php
         if($graphtype['graphtype']==0 || $graphtype['graphtype'] ==1){
-            echo "<select class='form-control' name='datatype' onchange=\"this.form.submit()\">
+            echo "<div class='col-md-12'>
+    Trạng thái dữ liệu:<select class='form-control' name='datatype' onchange=\"this.form.submit()\">
     <option value=0";
             if($_SESSION['datatype'] ==0) echo " selected='selected'";
-            echo ">Recent Data</option>
+            echo ">Dữ liệu liên tục</option>
     <option value=1";
             if($_SESSION['datatype'] ==1) echo " selected='selected'";
-            echo ">All Data</option>
+            echo ">Dữ liệu tổng hợp</option>
     </select>
+    </div>
 ";
             echo "</div>
 </form>
@@ -110,6 +116,7 @@
         }elseif ($graphtype['graphtype']==2 || $graphtype['graphtype'] ==3){
             echo '<div class=\'col-md-4\'>
         <div class="form-group">
+        Từ ngày:
             <div class=\'input-group date\' id=\'datetimepicker6\'>
                 <input type=\'text\'  class="form-control" />
                 <span class="input-group-addon">
@@ -120,6 +127,7 @@
     </div>
     <div class=\'col-md-4\'>
         <div class="form-group">
+        Đến ngày:
             <div class=\'input-group date\' id=\'datetimepicker7\'>
                 <input type=\'text\'  class="form-control" />
                 <span class="input-group-addon">
@@ -130,7 +138,7 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <button type="submit" class="btn btn-primary .btn-lg">Done</button>
+            <button type="submit" style="margin-top: 21px" class="btn btn-primary .btn-lg">Done</button>
         </div>
     </div>
     </div>

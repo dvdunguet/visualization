@@ -1,16 +1,16 @@
 <?php
-require('fpdf.php');
+require('fpdf/fpdf.php');
 $items = $_POST['chk'];
 $startDate=$_POST['startDate'];
 $endDate=$_POST['endDate'];
 $hostname=$_POST['hostname'];
 
 $url='http://localhost/visualization/report/';
-
+$str = utf8_decode("Báo cáo cho $hostname");
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',16);
-$pdf->Cell(0,10,"Report of $hostname",0,0,'C');
+$pdf->Cell(0,10,"$str",0,0,'C');
 $i=0;
 foreach ($items as $value){
     $url="$url"."createImage.php?itemid=$value&startDate=$startDate&endDate=$endDate#.jpg";

@@ -8,17 +8,17 @@
 }
 
 .UnselectedRow:hover {
-    background-color: yellow;
+    background-color: #cccccc;
     cursor:pointer;
 }
 
 .SelectedRow {
-    background-color: #4eee94;
+    background-color: #bceea3;
     cursor:pointer;
 }
 
 .SelectedRow:hover {
-    background-color: red;
+    /*background-color: red;*/
     cursor:pointer;
 }
 
@@ -26,4 +26,10 @@ div#submit {
     position: fixed;
     bottom: 0px;
     right: 0px;
+}
+.navbar-custom {
+    background-color: whitesmoke;
+}
+.navbar-custom .active {
+    background-color: #cccccc;
 }
