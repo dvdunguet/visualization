@@ -2,9 +2,9 @@
 include_once ("help/session.php");
 include_once ("database/zabbix.php");
 
+
 if(isset($_GET['groupid'])){
     session_set('groupid',$_GET['groupid']);
-
 }
 if( isset($_GET['hostid'])){
     session_set('hostid',$_GET['hostid']);
@@ -36,6 +36,10 @@ if( isset($_GET['endDate'])){
     $_SESSION['endDate']=$_GET['endDate'];
 }elseif (!isset($_SESSION['endDate'])){
     $_SESSION['endDate']=time()-604800;
+}
+if(!isset($_GET['graphid'])){
+    session_set('graphid',0);
+
 }
 
 $groups =get_groups();
