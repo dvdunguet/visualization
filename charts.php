@@ -37,10 +37,6 @@ if( isset($_GET['endDate'])){
 }elseif (!isset($_SESSION['endDate'])){
     $_SESSION['endDate']=time()-604800;
 }
-if(!isset($_GET['graphid'])){
-    session_set('graphid',0);
-
-}
 
 $groups =get_groups();
 $hosts = get_hosts($sql_host1,$sql_host2);
@@ -72,15 +68,15 @@ if(session_isset('hostid') && session_get('hostid')!=0){
 
 $graphs = get_graphs($sql_graph1,$sql_graph2);
 
-$graphsInHost=false;
-
-foreach ($graphs as $key => $value){
-    if($value['graphid'] == $_SESSION['graphid']){
-        $graphsInHost=true;
+if(isset($_SESSION['graphid'])){
+    $graphsInHost=false;
+    foreach ($graphs as $key => $value){
+        if($value['graphid'] == $_SESSION['graphid']){
+            $graphsInHost=true;
+        }
     }
+    if($graphsInHost==false){ unset($_SESSION['graphid']); }
 }
-if($graphsInHost==false){ unset($_SESSION['graphid']); }
-
 db_close();
 
 include_once ("views/charts.views.php");
