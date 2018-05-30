@@ -12,7 +12,7 @@
     <link rel="StyleSheet" type="text/css" href="css/table.css">
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-custom">
         <ul class="nav navbar-nav">
             <li><a href="charts.php">Đồ thị</a></li>
@@ -20,7 +20,7 @@
         </ul>
     </nav>
 </div>
-<div class="container">
+<div class="container-fluid">
     <form action="report.php" method="get">
         <div class="row">
             <div class='col-md-6'>
@@ -89,11 +89,11 @@
             <table class="table">
                 <thead>
                 <tr class="TableHead">
-                    <th>
+                    <th class="col-md-1">
                         <input type="checkbox" name="chkall" id="chkall"  onclick="javascript:selectAll();">
                     </th>
-                    <th>STT</th>
-                    <th>Từ khóa</th>
+                    <th class="col-md-2" >STT</th>
+                    <th class="col-md-9">Từ khóa</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -101,7 +101,10 @@
                 if(isset($items)){
                     $i=1;
                     foreach ($items as $value){
-                        echo "<tr class=\"UnselectedRow\" onclick=\"javascript:rowClick(this);\">
+//                        table-row;
+                        echo "<tr class=\"UnselectedRow\" id='number$i'";
+                        if($i>10) echo "style='display: none;'";
+                        echo " onclick=\"javascript:rowClick(this);\">
                                   <td>
                                     <input type=\"checkbox\" name=\"chk[]\" id=\"chk$i\" value=\"".$value['itemid']."\" onclick=\"javascript:chkClick(this);\">
                                   </td>
@@ -115,12 +118,82 @@
                 </tbody>
             </table>
         </div>
+        <div class="row">
+            <ul class="pagination pagination-lg">
+                <li><a id="prev" href="#">Previous</a></li>
+                <?php
+                $count=count($items);
+                $i=(int)(($count-1)/10)+1;
+                for($c=1;$c<=$i;$c++){
+                    if($c==1)
+                        echo "<li><a class='active page' id='page$c' href=\"#\">$c</a></li>";
+                    else
+                        echo "<li><a class='page' id='page$c' href=\"#\">$c</a></li>";
+                }
+                ?>
+                <li><a id="next" href="#">Next</a></li>
+            </ul>
+            <!--        <ul class="pagination pagination-lg">-->
+            <!--            <li><button>Previous</button></li>-->
+            <!--            <li><button>1</button></li>-->
+            <!--            <li><button>2</button></li>-->
+            <!--            <li><button>3</button></li>-->
+            <!--            <li><button>4</button></li>-->
+            <!--            <li><button>5</button></li>-->
+            <!--            <li><button>Next</button></li>-->
+            <!--        </ul>-->
+        </div>
         <div id="submit"><button class="btn btn-primary btn-lg" type="submit" ">Chọn</button></div>
-
     </form>
 </div>
 <script type="text/javascript" src="js/table.js"></script>
 <script>
+    var count=<?php echo $count; ?>;
+    var countpage=<?php echo $i; ?>;
+    $('#next').click(function () {
+        var active=$('.page.active');
+        var id = active.attr('id').replace(/page/, '')-1;
+        if(id < countpage-1){
+            active.removeClass('active');
+            $("#page"+(id+2)).addClass('active');
+            for(var i=1;i<=count;i++){
+                $("#number"+i).css("display", "none");
+            }
+            for(var i=1;i<=10;i++){
+                var tmp=((id+1)*10)+i;
+                $("#number"+tmp).css("display", "table-row");
+            }
+        }
+    });
+    $('#prev').click(function () {
+        var active=$('.page.active');
+        var id = active.attr('id').replace(/page/, '')-1;
+        if(id > 0) {
+            active.removeClass('active');
+            $("#page" + id).addClass('active');
+            for (var i = 1; i <= count; i++) {
+                $("#number" + i).css("display", "none");
+            }
+            for (var i = 1; i <= 10; i++) {
+                var tmp = ((id-1) * 10) + i;
+                $("#number" + tmp).css("display", "table-row");
+            }
+        }
+    });
+
+    $('.page').click(function () {
+        var id = $(this).attr('id').replace(/page/, '')-1;
+        $('.page.active').removeClass('active');
+        $("#page"+(id+1)).addClass('active');
+        for(var i=1;i<=count;i++){
+            $("#number"+i).css("display", "none");
+        }
+        for(var i=1;i<=10;i++){
+            var tmp=(id*10)+i;
+            $("#number"+tmp).css("display", "table-row");
+//            table-row
+        }
+    });
     $('#hostname').val($("#hostid option:selected").text());
     $(function () {
         $('#datetimepicker6').datetimepicker({
@@ -146,7 +219,6 @@
             $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
             $("#endDate").val(e.date.unix());
         });
-
     });
 
 </script>
