@@ -122,13 +122,15 @@
             <ul class="pagination pagination-lg">
                 <li><a id="prev" href="#">Previous</a></li>
                 <?php
-                $count=count($items);
-                $i=(int)(($count-1)/10)+1;
-                for($c=1;$c<=$i;$c++){
-                    if($c==1)
-                        echo "<li><a class='active page' id='page$c' href=\"#\">$c</a></li>";
-                    else
-                        echo "<li><a class='page' id='page$c' href=\"#\">$c</a></li>";
+                if(isset($items)){
+                    $count=count($items);
+                    $i=(int)(($count-1)/10)+1;
+                    for($c=1;$c<=$i;$c++){
+                        if($c==1)
+                            echo "<li><a class='active page' id='page$c' href=\"#\">$c</a></li>";
+                        else
+                            echo "<li><a class='page' id='page$c' href=\"#\">$c</a></li>";
+                    }
                 }
                 ?>
                 <li><a id="next" href="#">Next</a></li>
