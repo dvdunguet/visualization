@@ -1,0 +1,38 @@
+/*.TableHead {*/
+    /*background-color: white;*/
+/*}*/
+
+.UnselectedRow {
+    background-color: white;
+    cursor:pointer;
+}
+
+.UnselectedRow:hover {
+    background-color: #cccccc;
+    cursor:pointer;
+}
+
+.SelectedRow {
+    background-color: #bceea3;
+    cursor:pointer;
+}
+
+.SelectedRow:hover {
+    /*background-color: red;*/
+    cursor:pointer;
+}
+
+/*div#submit {*/
+    /*position: fixed;*/
+    /*bottom: 0px;*/
+    /*right: 0px;*/
+/*}*/
+.navbar-custom {
+    background-color: whitesmoke;
+}
+.navbar-custom .active {
+    background-color: #cccccc;
+}
+.pagination .active {
+    background-color: #cccccc;
+}

@@ -44,7 +44,7 @@ function get_item_detail($itemid){
     $result=db_get_row($sql);
     return $result;
 }
-function get_data_from_history($str,$itemid,$startDate,$endDate){
+function get_data_from_history($str,$itemid,$startDate=null,$endDate=null){
     $tmp='';
     if(isset($startDate)&&isset($endDate)){
         $tmp="AND (clock BETWEEN $startDate AND $endDate)";
@@ -56,7 +56,7 @@ function get_data_from_history($str,$itemid,$startDate,$endDate){
 
 
 
-function get_data_from_trends($str,$itemid,$startDate,$endDate){
+function get_data_from_trends($str,$itemid,$startDate=null,$endDate=null){
     $tmp='';
     if(isset($startDate)&&isset($endDate)){
         $tmp="AND (clock BETWEEN $startDate AND $endDate)";

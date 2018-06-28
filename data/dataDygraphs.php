@@ -61,6 +61,7 @@ var g = data.dygraph;
 
     $head = array();
     $datas = array();
+    $minclock=array();
 
     foreach ($items as $value) {
         $names = get_item_detail($value['itemid']);
@@ -71,10 +72,16 @@ var g = data.dygraph;
         }elseif ($names['value_type'] == FLOAT)
             $str = '';
 
-        if($_GET['datatype']==0)
-            $items=get_data_from_history($str,$value['itemid']);
-        elseif ($_GET['datatype']==1)
-            $items=get_data_from_trends($str,$value['itemid']);
+        if($_GET['datatype']==0) {
+            $items = get_data_from_history($str, $value['itemid'],$_GET['startDate'],$_GET['endDate']);
+            $time = get_time_min_from_history($str,$value['itemid']);
+            array_push($minclock,$time['MIN(clock)']);
+        }
+        elseif ($_GET['datatype']==1) {
+            $items = get_data_from_trends($str, $value['itemid'],$_GET['startDate'],$_GET['endDate']);
+            $time = get_time_min_from_trends($str,$value['itemid']);
+            array_push($minclock,$time['MIN(clock)']);
+        }
 
         if($_GET['datatype']==0)
         $time=convert_to_timestamp($names['delay']);
@@ -93,6 +100,7 @@ var g = data.dygraph;
 
         array_push($datas, $items);
     }
+    $minTime=min(array_diff($minclock,array(null)));
     foreach ($head as $key =>$value){
         $value[1]=get_string_between($value[1],'[',']');
         $value[1]=explode(',',$value[1]);
@@ -225,6 +233,6 @@ var g = data.dygraph;
         }          // options
         );'."\n";
     }
-
+include_once 'datetime.php';
 ?>
 

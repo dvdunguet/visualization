@@ -2,9 +2,9 @@
 include_once ("help/session.php");
 include_once ("database/zabbix.php");
 
+
 if(isset($_GET['groupid'])){
     session_set('groupid',$_GET['groupid']);
-
 }
 if( isset($_GET['hostid'])){
     session_set('hostid',$_GET['hostid']);
@@ -68,15 +68,15 @@ if(session_isset('hostid') && session_get('hostid')!=0){
 
 $graphs = get_graphs($sql_graph1,$sql_graph2);
 
-$graphsInHost=false;
-
-foreach ($graphs as $key => $value){
-    if($value['graphid'] == $_SESSION['graphid']){
-        $graphsInHost=true;
+if(isset($_SESSION['graphid'])){
+    $graphsInHost=false;
+    foreach ($graphs as $key => $value){
+        if($value['graphid'] == $_SESSION['graphid']){
+            $graphsInHost=true;
+        }
     }
+    if($graphsInHost==false){ unset($_SESSION['graphid']); }
 }
-if($graphsInHost==false){ unset($_SESSION['graphid']); }
-
 db_close();
 
 include_once ("views/charts.views.php");
