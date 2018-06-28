@@ -93,6 +93,7 @@
     </div>
     <div class="row">
         <?php
+        if(isset($_SESSION['graphid'])){
         if($graphtype['graphtype']==0 || $graphtype['graphtype'] ==1){
             echo "<div class='col-md-3'>
     Trạng thái dữ liệu:<select class='form-control' name='datatype' onchange=\"this.form.submit()\">
@@ -181,6 +182,7 @@
             echo '<div id="piechart" style="width: 900px; height: 500px;"></div>';
             echo '<script type="text/javascript" src="data/drawGraph.php?graphid='.$_SESSION['graphid'].'&startDate='.$_SESSION['startDate'].'&endDate='.$_SESSION['endDate'].'"></script>';
         }
+    }        
         ?>
     </div>
 </div>
